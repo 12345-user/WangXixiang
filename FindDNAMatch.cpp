@@ -11,9 +11,7 @@
 
 #include <iostream>
 #include <string>
-
 using namespace std;
-//#include "csc300222fall/assignment1/RemoveComments.h" //for OJ
 int is_correct(string a) {
     for (int i = 0; i < sizeof(a); i++) {
         if (a[i] == 'A' or a[i] == 'T' or a[i] == 'C' or a[i] == 'G') {
@@ -32,8 +30,7 @@ int is_correct(string a) {
  * the strand s2, or -1 if no such position exists.  If the start
  * parameter is supplied, the search begins at that index position.
  */
- //��startΪs2�Ŀ�ʼλ�ã����ʱ��������ж���ͬ��
- //��������ͬ����֤��������ԡ�
+ //Start at the position staet, check whether there exist a proper position for s1.
 int findDNAMatch(string s1, string s2, int start) {
     // TODO
     int pos = 0;
@@ -43,9 +40,9 @@ int findDNAMatch(string s1, string s2, int start) {
         if (s2[i] == s1[0]) {
             pos = i;
             int k = 0;
-            while (k < s1.length()) {//����ƥ�䳤�Ȳ��ᳬ��s2���ܳ��ȡ�
+            while (k < s1.length()) {//Control the range.
                 if (s1[k] == s2[i + k]) {
-                    Count += 1;//�ӵ�һ�������Ժ�ÿ�ɹ�ƥ��һ�Σ�����һ��Cout, ��Cout����s1�ĳ�����ͬ����֤����ȫ��ͬ����ȫƥ�䡣
+                    Count += 1;//Use Count to check whether the base are paired.
                 }
                 k++;
             }
@@ -109,12 +106,12 @@ string findAllMatches(string s1, string s2) {
     else {
         //cout << "Right Enter!" << endl;
         string sn = s1;
-        s1 = matchingStrand(s1);//ת��s1
+        s1 = matchingStrand(s1);//Change the s1 to be its matching sequence.
         int* pos_Array = new int[10];
         int start_position = 0;
         int Count_number = 0;
         int ret = findDNAMatch(s1, s2, start_position);
-        while (start_position < ((s2.length() - s1.length() + 1))) {//��֤ƥ��ʱ���ᳬ������
+        while (start_position < ((s2.length() - s1.length() + 1))) {//Control the range.
 
             if (ret == -1) {
                 ret = findDNAMatch(s1, s2, start_position);
